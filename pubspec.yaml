@@ -1,0 +1,16 @@
+name: select_modal_flutter
+description: A new Flutter package project.
+version: 0.0.1
+author: Javier Moreno
+homepage: https://github/javiomoreno/select_modal_flutter
+
+environment:
+  sdk: ">=2.15.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
