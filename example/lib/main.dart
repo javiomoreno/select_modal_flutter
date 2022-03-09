@@ -54,6 +54,8 @@ class _HomePageState extends State<HomePage> {
     const ItemSelect(value: 4, label: 'Antonio'),
   ];
 
+  bool errorSelectName = false;
+
   @override
   void dispose() {
     controllerCity.dispose();
@@ -73,7 +75,7 @@ class _HomePageState extends State<HomePage> {
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text('Cities'),
               const SizedBox(
@@ -124,7 +126,25 @@ class _HomePageState extends State<HomePage> {
                 ),
                 icon: Icons.person,
                 colorIcon: Colors.blue,
+                error: errorSelectName,
               ),
+              const SizedBox(
+                height: 15.0,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (controllerName.text.isEmpty) {
+                    setState(() {
+                      errorSelectName = true;
+                    });
+                  } else {
+                    setState(() {
+                      errorSelectName = false;
+                    });
+                  }
+                },
+                child: const Text('Save'),
+              )
             ],
           ),
         ),

@@ -15,6 +15,7 @@ class SelectModalFlutter extends StatefulWidget {
   final InputBorder? borderTextField;
   final IconData? icon;
   final Color? colorIcon;
+  final bool? error;
 
   const SelectModalFlutter({
     Key? key,
@@ -26,6 +27,7 @@ class SelectModalFlutter extends StatefulWidget {
     this.borderTextField,
     this.icon,
     this.colorIcon,
+    this.error,
   }) : super(key: key);
 
   @override
@@ -64,8 +66,22 @@ class _SelectModalFlutterState extends State<SelectModalFlutter> {
 
   @override
   Widget build(BuildContext context) {
+    BoxDecoration? newDecoration;
+    if (widget.error != null) {
+      newDecoration = widget.boxDecoration?.copyWith(
+          border: widget.error == true
+              ? widget.borderTextField == null
+                  ? Border(bottom: BorderSide(color: Colors.red, width: 1.0))
+                  : Border.all(color: Colors.red, width: 1.0)
+              : null);
+    }
+
     return Container(
-      decoration: widget.boxDecoration ?? null,
+      decoration: widget.boxDecoration != null
+          ? widget.error != null
+              ? newDecoration
+              : widget.boxDecoration
+          : null,
       child: Padding(
         padding: EdgeInsets.only(left: 5.0),
         child: TextField(
@@ -75,10 +91,14 @@ class _SelectModalFlutterState extends State<SelectModalFlutter> {
           decoration: InputDecoration(
             hintText: widget.title,
             border: widget.borderTextField ?? null,
-            suffixIcon: widget.icon != null ? Icon(
-              widget.icon,
-              color: widget.colorIcon
-            ) : null,
+            suffixIcon: widget.icon != null
+                ? Icon(widget.icon,
+                    color: widget.error != null
+                        ? widget.error == true
+                            ? Colors.red
+                            : widget.colorIcon
+                        : widget.colorIcon)
+                : null,
           ),
         ),
       ),
