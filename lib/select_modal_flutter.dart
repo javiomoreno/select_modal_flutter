@@ -6,6 +6,8 @@ import 'package:select_modal_flutter/src/widgets/select_dialog.dart';
 
 export 'package:select_modal_flutter/src/models/item_select.dart';
 
+///Main class,  [title]
+///[searchText] optional, text in modal search, [controller] TextEditingController to TextField
 class SelectModalFlutter extends StatefulWidget {
   final String title;
   final String? searchText;
