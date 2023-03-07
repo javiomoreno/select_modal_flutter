@@ -10,7 +10,6 @@ import 'package:select_modal_flutter/src/models/item_select.dart';
 class MultiSelectDialogWidget extends StatefulWidget {
   final List<ItemSelect> itemList;
   final List<ItemSelect> selectedItem;
-  final ValueChanged<List<ItemSelect>> onItemChanged;
   final String searchText;
   final List<ItemSelect> filteredItems;
   final Color? colorButtonSelect;
@@ -19,7 +18,6 @@ class MultiSelectDialogWidget extends StatefulWidget {
     Key? key,
     required this.searchText,
     required this.itemList,
-    required this.onItemChanged,
     required this.selectedItem,
     required this.filteredItems,
     this.colorButtonSelect,
@@ -36,7 +34,7 @@ class _MultiSelectDialogWidgetState extends State<MultiSelectDialogWidget> {
 
   @override
   void initState() {
-    _selectedItem = widget.selectedItem;
+    _selectedItem = [...widget.selectedItem];
     _filteredItems = widget.filteredItems;
 
     super.initState();
@@ -94,8 +92,7 @@ class _MultiSelectDialogWidgetState extends State<MultiSelectDialogWidget> {
   Widget _iconSave() {
     return GestureDetector(
       onTap: () {
-        widget.onItemChanged(_selectedItem);
-        Navigator.pop(context);
+        Navigator.pop(context, _selectedItem);
       },
       child: Container(
         padding: EdgeInsets.all(5.0),

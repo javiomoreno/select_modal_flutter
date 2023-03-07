@@ -66,14 +66,15 @@ class _MultiSelectModalFlutterState extends State<MultiSelectModalFlutter> {
           itemList: filteredItems,
           selectedItem: _selectedItem,
           colorButtonSelect: widget.colorButtonSelect,
-          onItemChanged: (List<ItemSelect> items) {
-            _selectedItem = items;
-            widget.onItemSelect(items);
-            setState(() {});
-          },
         ),
       ),
-    );
+    ).then((value) {
+      if (value is List<ItemSelect>) {
+        _selectedItem = value;
+        widget.onItemSelect(value);
+        setState(() {});
+      }
+    });
     if (this.mounted) setState(() {});
   }
 

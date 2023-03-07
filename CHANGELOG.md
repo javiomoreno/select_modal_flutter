@@ -9,3 +9,6 @@
 
 ## 0.1.1
 - add multiselect
+
+## 0.1.2
+- fixed multiselect
