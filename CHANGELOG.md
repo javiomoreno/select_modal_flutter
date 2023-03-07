@@ -6,3 +6,6 @@
 
 ## 0.0.3
 - add comments
+
+## 0.1.1
+- add multiselect

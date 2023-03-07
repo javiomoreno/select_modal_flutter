@@ -45,13 +45,9 @@ class _HomePageState extends State<HomePage> {
     const ItemSelect(value: 2, label: 'San Cristobal'),
     const ItemSelect(value: 3, label: 'Merida'),
     const ItemSelect(value: 4, label: 'Maracaibo'),
-  ];
-
-  List<ItemSelect> listItemSelectCountries = [
-    const ItemSelect(value: 1, label: 'Venezuela'),
-    const ItemSelect(value: 2, label: 'Colombia'),
-    const ItemSelect(value: 3, label: 'Alemania'),
-    const ItemSelect(value: 4, label: 'Peru'),
+    const ItemSelect(value: 4, label: 'Barquisimeto'),
+    const ItemSelect(value: 4, label: 'Los Teques'),
+    const ItemSelect(value: 4, label: 'La Guaira'),
   ];
 
   List<ItemSelect> listItemSelectNames = [
@@ -84,38 +80,14 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Cities'),
-              const SizedBox(
-                height: 15.0,
-              ),
-              SelectModalFlutter(
-                title: 'City',
-                searchText: 'Select city',
-                controller: controllerCity,
-                listItemSelect: listItemSelectCities,
-                borderTextField: InputBorder.none,
-                boxDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  color: Colors.white,
-                  border: Border.all(color: Colors.grey, width: 1.0),
+              const Text(
+                '--- Select ---',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              const Text('Countries'),
-              const SizedBox(
-                height: 15.0,
-              ),
-              SelectModalFlutter(
-                title: 'Country',
-                searchText: 'Select country',
-                controller: controllerCountry,
-                listItemSelect: listItemSelectCountries,
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
+              const SizedBox(height: 15.0),
               const Text('Names'),
               const SizedBox(
                 height: 15.0,
@@ -138,6 +110,33 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 15.0,
               ),
+              const Text(
+                '--- Multi Select ---',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 15.0),
+              const Text('Cities'),
+              const SizedBox(
+                height: 15.0,
+              ),
+              MultiSelectModalFlutter(
+                  title: 'City',
+                  searchText: 'Select city',
+                  listItemSelect: listItemSelectCities,
+                  borderTextField: InputBorder.none,
+                  boxDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Colors.white,
+                    border: Border.all(color: Colors.grey, width: 1.0),
+                  ),
+                  colorButtonSelect: Colors.blue,
+                  onItemSelect: (List<ItemSelect> items) {
+                    print(items);
+                  }),
+              const SizedBox(height: 15.0),
               ElevatedButton(
                 onPressed: () {
                   if (controllerName.text.isEmpty) {

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:select_modal_flutter/src/models/item_select.dart';
 
+///Main widget,  
+///[itemList] List original to search
+///[selectedItem] Item selected
+///[onItemChanged] Function to return value selected
+///[searchText] Text in search textfield
+///[filteredItems] List filtered to search
 class SelectDialogWidget extends StatefulWidget {
   final List<ItemSelect> itemList;
   final ItemSelect selectedItem;
@@ -38,50 +44,56 @@ class _SelectDialogWidgetState extends State<SelectDialogWidget> {
         backgroundColor: Colors.white,
         child: Container(
           padding: EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.search),
-                    labelText: widget.searchText,
-                  ),
-                  onChanged: (value) {
-                    _filteredItems = widget.itemList
-                        .where((item) => item.label!
-                            .toLowerCase()
-                            .contains(value.toLowerCase()))
-                        .toList();
-                    if (this.mounted) setState(() {});
-                  },
-                ),
-              ),
-              SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _filteredItems.length,
-                  itemBuilder: (ctx, index) => Column(
-                    children: <Widget>[
-                      ListTile(
-                        title: Text(
-                          _filteredItems[index].label!,
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                        onTap: () {
-                          _selectedItem = _filteredItems[index];
-                          widget.onItemChanged(_selectedItem);
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      Divider(thickness: 1),
-                    ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.search),
+                      labelText: widget.searchText,
+                    ),
+                    onChanged: (value) {
+                      _filteredItems = widget.itemList
+                          .where((item) => item.label!
+                              .toLowerCase()
+                              .contains(value.toLowerCase()))
+                          .toList();
+                      if (this.mounted) setState(() {});
+                    },
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 20),
+                Column(
+                  children: _filteredItems.map((item) => _item(item)).toList(),
+                ),
+              ],
+            ),
           ),
         ),
       );
+
+  Widget _item(ItemSelect item) {
+    return Column(
+      children: [
+        Container(
+          color: _selectedItem.value == item.value ? Colors.grey[200] : null,
+          child: ListTile(
+            title: Text(
+              item.label!,
+              style: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+            trailing: _selectedItem.value == item.value ? Icon(Icons.check) : null,
+            onTap: () {
+              widget.onItemChanged(item);
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+        const Divider(thickness: 1)
+      ],
+    );
+  }
 }
