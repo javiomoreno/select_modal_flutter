@@ -99,7 +99,7 @@ class _MultiSelectModalFlutterState extends State<MultiSelectModalFlutter> {
                   : widget.boxDecoration
               : null,
           child: Padding(
-            padding: EdgeInsets.only(left: 5.0),
+            padding: EdgeInsets.only(left: 10.0),
             child: TextField(
               onTap: _changeSelectOption,
               readOnly: true,

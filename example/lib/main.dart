@@ -88,7 +88,9 @@ class _HomePageState extends State<HomePage> {
               SelectModalFlutter(
                 title: 'Name',
                 searchText: 'Select names',
-                controller: controllerName,
+                onItemSelect: (ItemSelect value) {
+                  print(value);
+                },
                 listItemSelect: listItemSelectNames,
                 borderTextField: InputBorder.none,
                 boxDecoration: BoxDecoration(

@@ -7,7 +7,7 @@ export 'package:select_modal_flutter/src/models/item_select.dart';
 ///Main class,
 ///[title] hintText in searh
 ///[searchText] optional, text in modal search,
-///[controller] TextEditingController to TextField
+///[onItemSelect] Function return item select
 ///[listItemSelect] List to search
 ///[boxDecoration] optional, boxdecoration to container
 ///[borderTextField] optiona, border to container
@@ -17,7 +17,7 @@ export 'package:select_modal_flutter/src/models/item_select.dart';
 class SelectModalFlutter extends StatefulWidget {
   final String title;
   final String? searchText;
-  final TextEditingController controller;
+  final Function onItemSelect;
   final List<ItemSelect> listItemSelect;
   final BoxDecoration? boxDecoration;
   final InputBorder? borderTextField;
@@ -28,7 +28,7 @@ class SelectModalFlutter extends StatefulWidget {
   const SelectModalFlutter({
     Key? key,
     required this.title,
-    required this.controller,
+    required this.onItemSelect,
     this.searchText,
     required this.listItemSelect,
     this.boxDecoration,
@@ -44,6 +44,7 @@ class SelectModalFlutter extends StatefulWidget {
 
 class _SelectModalFlutterState extends State<SelectModalFlutter> {
   late ItemSelect _selectedItem = new ItemSelect();
+  final controller = TextEditingController();
 
   @override
   void initState() {
@@ -63,7 +64,8 @@ class _SelectModalFlutterState extends State<SelectModalFlutter> {
           selectedItem: _selectedItem,
           onItemChanged: (ItemSelect item) {
             _selectedItem = item;
-            widget.controller.text = item.label!;
+            widget.onItemSelect(item);
+            controller.text = item.label!;
             setState(() {});
           },
         ),
@@ -91,10 +93,10 @@ class _SelectModalFlutterState extends State<SelectModalFlutter> {
               : widget.boxDecoration
           : null,
       child: Padding(
-        padding: EdgeInsets.only(left: 5.0),
+        padding: EdgeInsets.only(left: 10.0),
         child: TextField(
           onTap: _changeSelectOption,
-          controller: widget.controller,
+          controller: controller,
           readOnly: true,
           decoration: InputDecoration(
             hintText: widget.title,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:select_modal_flutter/src/models/item_select.dart';
 
-///Main widget,  
+///Main widget,
 ///[itemList] List original to search
 ///[selectedItem] Item selected
 ///[onItemChanged] Function to return value selected
@@ -85,7 +85,8 @@ class _SelectDialogWidgetState extends State<SelectDialogWidget> {
               item.label!,
               style: const TextStyle(fontWeight: FontWeight.w700),
             ),
-            trailing: _selectedItem.value == item.value ? Icon(Icons.check) : null,
+            trailing:
+                _selectedItem.value == item.value ? Icon(Icons.check) : null,
             onTap: () {
               widget.onItemChanged(item);
               Navigator.of(context).pop();

@@ -1,6 +1,6 @@
 name: select_modal_flutter
 description: Flutter package to create a select with its options in a modal window with search filter.
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/javiomoreno/select_modal_flutter
 
 environment:

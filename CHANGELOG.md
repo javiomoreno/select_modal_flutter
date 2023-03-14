@@ -12,3 +12,6 @@
 
 ## 0.1.2
 - fixed multiselect
+
+## 0.1.3
+- fixed select
